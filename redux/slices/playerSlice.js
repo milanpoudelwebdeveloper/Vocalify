@@ -44,7 +44,6 @@ const playerSlice = createSlice({
       state.isActive = true;
     },
     playPause: (state, { payload }) => {
-      console.log(payload)
       state.isPlaying = payload;
     },
     selectGenreListId: (state, { payload }) => {

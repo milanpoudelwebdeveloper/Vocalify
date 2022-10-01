@@ -2,12 +2,18 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { nextSong, playPause } from "../../redux/slices/playerSlice";
 import Controls from "./Controls";
+import Player from "./Player";
 import SeekBar from "./SeekBar";
 import Track from "./Track";
 
 const MusicPlayer = () => {
   const [shuffle, setShuffle] = useState(false);
   const [repeat, setRepeat] = useState(false);
+
+  const [seekTime, setSeekTime] = useState(0);
+  const [duration, setDuration] = useState(0);
+  const [appTime, setAppTime] = useState(0);
+  const [volume, setVolume] = useState(0.5);
   const { activeSong, isActive, isPlaying, currentIndex, currentSongs } =
     useSelector((state) => state.player);
 
@@ -43,13 +49,13 @@ const MusicPlayer = () => {
   };
 
   return (
-    <div className="relative sm:px-12 px-8 w-full flex items-center justify-between">
+    <div className="relative flex items-center justify-between w-full px-8 sm:px-12">
       <Track
         activeSong={activeSong}
         isPlaying={isPlaying}
         isActive={isActive}
       />
-      <div className="flex-1 flex flex-col items-center justify-center">
+      <div className="flex flex-col items-center justify-center flex-1">
         <Controls
           isPlaying={isPlaying}
           handlePlayPause={handlePlayPause}
@@ -61,7 +67,25 @@ const MusicPlayer = () => {
           setShuffle={setShuffle}
           currentSongs={currentSongs}
         />
-        <SeekBar />
+        <SeekBar
+         value={appTime}
+         min="0"
+         max={duration}
+         onInput={(event) => setSeekTime(event.target.value)}
+         setSeekTime={setSeekTime}
+         appTime={appTime}
+        />
+        <Player
+          activeSong={activeSong}
+          repeat={repeat}
+          isPlaying={isPlaying}
+          seekTime={seekTime}
+          currentIndex={currentIndex}
+          volume={volume}
+          onEnded={handleNextSong}
+          onTimeUpdate={(event) => setAppTime(event.target.currentTime)}
+          onLoadedData={(event) => setDuration(event.target.duration)}
+        />
       </div>
     </div>
   );

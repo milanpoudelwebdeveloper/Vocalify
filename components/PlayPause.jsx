@@ -8,8 +8,6 @@ const PlayPause = ({
   handlePause,
   handlePlay,
 }) => {
-  console.log("is playing", isPlaying);
-  console.log("active song", activeSong);
   return (
     <>
       {isPlaying && activeSong?.title === song?.title ? (
