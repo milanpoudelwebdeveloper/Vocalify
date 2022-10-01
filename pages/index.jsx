@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import Discover from "../components/DiscoverPage/Discover";
-import MusicPlayer from "../components/MusicPlayer/MusicPlayer";
+import MusicPlayer from "../components/MusicPlayer";
 import SearchBar from "../components/SearchBar";
 import SideBar from "../components/SideBar";
 import TopPlay from "../components/TopPlay";

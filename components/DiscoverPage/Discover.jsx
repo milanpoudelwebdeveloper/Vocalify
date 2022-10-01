@@ -8,7 +8,6 @@ import SongCard from "../SongCard";
 import { useDispatch, useSelector } from "react-redux";
 
 const Discover = () => {
-  const dispatch = useDispatch();
   const { activeSong, isPlaying } = useSelector((state) => state.player);
   const genreTitle = "Pop";
 
@@ -28,6 +27,7 @@ const Discover = () => {
   if (error) {
     return <Error />;
   }
+
 
   return (
     <div className="flex flex-col">
